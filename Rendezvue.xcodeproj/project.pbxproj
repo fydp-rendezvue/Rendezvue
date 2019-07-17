@@ -1,0 +1,359 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D877DEB222DEA8DC00254781 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D877DEB122DEA8DC00254781 /* AppDelegate.swift */; };
+		D877DEB422DEA8DC00254781 /* RoomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D877DEB322DEA8DC00254781 /* RoomsViewController.swift */; };
+		D877DEB722DEA8DC00254781 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D877DEB522DEA8DC00254781 /* Main.storyboard */; };
+		D877DEB922DEA8E300254781 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D877DEB822DEA8E300254781 /* Assets.xcassets */; };
+		D877DEBC22DEA8E300254781 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D877DEBA22DEA8E300254781 /* LaunchScreen.storyboard */; };
+		D877DEC422DEADA000254781 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D877DEC322DEADA000254781 /* CameraViewController.swift */; };
+		D877DEC822DEB7A200254781 /* RoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D877DEC722DEB7A200254781 /* RoomTableViewCell.swift */; };
+		D877DECC22DEC94800254781 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D877DECB22DEC94800254781 /* UserTableViewCell.swift */; };
+		D877DECE22DECA6500254781 /* RoomSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D877DECD22DECA6500254781 /* RoomSettingsViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		D877DEAE22DEA8DC00254781 /* Rendezvue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rendezvue.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D877DEB122DEA8DC00254781 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D877DEB322DEA8DC00254781 /* RoomsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsViewController.swift; sourceTree = "<group>"; };
+		D877DEB622DEA8DC00254781 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D877DEB822DEA8E300254781 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D877DEBB22DEA8E300254781 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D877DEBD22DEA8E300254781 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D877DEC322DEADA000254781 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		D877DEC722DEB7A200254781 /* RoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomTableViewCell.swift; sourceTree = "<group>"; };
+		D877DECB22DEC94800254781 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
+		D877DECD22DECA6500254781 /* RoomSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomSettingsViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D877DEAB22DEA8DC00254781 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D877DEA522DEA8DC00254781 = {
+			isa = PBXGroup;
+			children = (
+				D877DEB022DEA8DC00254781 /* Rendezvue */,
+				D877DEAF22DEA8DC00254781 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D877DEAF22DEA8DC00254781 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D877DEAE22DEA8DC00254781 /* Rendezvue.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D877DEB022DEA8DC00254781 /* Rendezvue */ = {
+			isa = PBXGroup;
+			children = (
+				D877DEB122DEA8DC00254781 /* AppDelegate.swift */,
+				D877DEB322DEA8DC00254781 /* RoomsViewController.swift */,
+				D877DEB522DEA8DC00254781 /* Main.storyboard */,
+				D877DECD22DECA6500254781 /* RoomSettingsViewController.swift */,
+				D877DECB22DEC94800254781 /* UserTableViewCell.swift */,
+				D877DEC722DEB7A200254781 /* RoomTableViewCell.swift */,
+				D877DEC322DEADA000254781 /* CameraViewController.swift */,
+				D877DEB822DEA8E300254781 /* Assets.xcassets */,
+				D877DEBA22DEA8E300254781 /* LaunchScreen.storyboard */,
+				D877DEBD22DEA8E300254781 /* Info.plist */,
+			);
+			path = Rendezvue;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D877DEAD22DEA8DC00254781 /* Rendezvue */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D877DEC022DEA8E300254781 /* Build configuration list for PBXNativeTarget "Rendezvue" */;
+			buildPhases = (
+				D877DEAA22DEA8DC00254781 /* Sources */,
+				D877DEAB22DEA8DC00254781 /* Frameworks */,
+				D877DEAC22DEA8DC00254781 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Rendezvue;
+			productName = Rendezvue;
+			productReference = D877DEAE22DEA8DC00254781 /* Rendezvue.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D877DEA622DEA8DC00254781 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1020;
+				LastUpgradeCheck = 1020;
+				ORGANIZATIONNAME = Rendezvue;
+				TargetAttributes = {
+					D877DEAD22DEA8DC00254781 = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
+				};
+			};
+			buildConfigurationList = D877DEA922DEA8DC00254781 /* Build configuration list for PBXProject "Rendezvue" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D877DEA522DEA8DC00254781;
+			productRefGroup = D877DEAF22DEA8DC00254781 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D877DEAD22DEA8DC00254781 /* Rendezvue */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D877DEAC22DEA8DC00254781 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D877DEBC22DEA8E300254781 /* LaunchScreen.storyboard in Resources */,
+				D877DEB922DEA8E300254781 /* Assets.xcassets in Resources */,
+				D877DEB722DEA8DC00254781 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D877DEAA22DEA8DC00254781 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D877DEC822DEB7A200254781 /* RoomTableViewCell.swift in Sources */,
+				D877DEB422DEA8DC00254781 /* RoomsViewController.swift in Sources */,
+				D877DECE22DECA6500254781 /* RoomSettingsViewController.swift in Sources */,
+				D877DEB222DEA8DC00254781 /* AppDelegate.swift in Sources */,
+				D877DECC22DEC94800254781 /* UserTableViewCell.swift in Sources */,
+				D877DEC422DEADA000254781 /* CameraViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		D877DEB522DEA8DC00254781 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D877DEB622DEA8DC00254781 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D877DEBA22DEA8E300254781 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D877DEBB22DEA8E300254781 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D877DEBE22DEA8E300254781 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D877DEBF22DEA8E300254781 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D877DEC122DEA8E300254781 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3WKSMSJZ49;
+				INFOPLIST_FILE = Rendezvue/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = rendezvue.Rendezvue;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D877DEC222DEA8E300254781 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3WKSMSJZ49;
+				INFOPLIST_FILE = Rendezvue/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = rendezvue.Rendezvue;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D877DEA922DEA8DC00254781 /* Build configuration list for PBXProject "Rendezvue" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D877DEBE22DEA8E300254781 /* Debug */,
+				D877DEBF22DEA8E300254781 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D877DEC022DEA8E300254781 /* Build configuration list for PBXNativeTarget "Rendezvue" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D877DEC122DEA8E300254781 /* Debug */,
+				D877DEC222DEA8E300254781 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D877DEA622DEA8DC00254781 /* Project object */;
+}
