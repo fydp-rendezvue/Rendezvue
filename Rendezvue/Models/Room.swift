@@ -8,15 +8,25 @@
 
 import Foundation
 
+struct RoomStruct {
+    var roomId:Int = -1
+    var roomName:String = ""
+    
+    init(roomId: Int, roomName: String) {
+        self.roomId = roomId
+        self.roomName = roomName
+    }
+}
+
 class Room {
     //instantiated on first access
     static let sharedInstance = Room()
     
     let currentUserId:Int = 1;
-    var rooms = [(Int, String)]();
+    var rooms:[Int:RoomStruct] = [:];
     
     func getRooms() {
-        let requestUrl = "https://f6a53878.ngrok.io/users/\(currentUserId)/rooms"
+        let requestUrl = "https://b86719c3.ngrok.io/users/\(currentUserId)/rooms"
         let session = URLSession.shared
         let url = URL(string: requestUrl)!
         
@@ -49,7 +59,9 @@ class Room {
                     for roomInfo in jsonArray {
                         guard let roomId = roomInfo["roomId"] as? Int else { return }
                         guard let roomName = roomInfo["roomName"] as? String else { return }
-                        self.rooms.append((roomId, roomName))
+                        
+                        let roomStruct = RoomStruct(roomId: roomId, roomName: roomName)
+                        self.rooms[roomId] = roomStruct
                     }
                 }
             } catch {
