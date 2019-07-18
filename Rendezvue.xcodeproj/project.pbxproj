@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE46D7F722DFF746009E5648 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE46D7F622DFF746009E5648 /* Room.swift */; };
 		D877DEB222DEA8DC00254781 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D877DEB122DEA8DC00254781 /* AppDelegate.swift */; };
 		D877DEB422DEA8DC00254781 /* RoomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D877DEB322DEA8DC00254781 /* RoomsViewController.swift */; };
 		D877DEB722DEA8DC00254781 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D877DEB522DEA8DC00254781 /* Main.storyboard */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE46D7F622DFF746009E5648 /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		D877DEAE22DEA8DC00254781 /* Rendezvue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rendezvue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D877DEB122DEA8DC00254781 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D877DEB322DEA8DC00254781 /* RoomsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsViewController.swift; sourceTree = "<group>"; };
@@ -43,6 +45,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE46D7F822E02052009E5648 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CE46D7F622DFF746009E5648 /* Room.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		D877DEA522DEA8DC00254781 = {
 			isa = PBXGroup;
 			children = (
@@ -62,6 +72,7 @@
 		D877DEB022DEA8DC00254781 /* Rendezvue */ = {
 			isa = PBXGroup;
 			children = (
+				CE46D7F822E02052009E5648 /* Models */,
 				D877DEB122DEA8DC00254781 /* AppDelegate.swift */,
 				D877DEB322DEA8DC00254781 /* RoomsViewController.swift */,
 				D877DEB522DEA8DC00254781 /* Main.storyboard */,
@@ -147,6 +158,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE46D7F722DFF746009E5648 /* Room.swift in Sources */,
 				D877DEC822DEB7A200254781 /* RoomTableViewCell.swift in Sources */,
 				D877DEB422DEA8DC00254781 /* RoomsViewController.swift in Sources */,
 				D877DECE22DECA6500254781 /* RoomSettingsViewController.swift in Sources */,

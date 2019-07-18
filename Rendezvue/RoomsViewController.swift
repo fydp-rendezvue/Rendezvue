@@ -18,6 +18,8 @@ class RoomsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewDidLoad()
         roomList.delegate = self
         roomList.dataSource = self
+        
+        Room.sharedInstance.getRooms()
     }
     
     
