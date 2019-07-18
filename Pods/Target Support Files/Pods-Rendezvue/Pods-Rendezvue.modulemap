@@ -1,0 +1,6 @@
+framework module Pods_Rendezvue {
+  umbrella header "Pods-Rendezvue-umbrella.h"
+
+  export *
+  module * { export * }
+}
