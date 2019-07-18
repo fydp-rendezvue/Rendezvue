@@ -17,9 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="G3r-xg-mFT">
-                                <rect key="frame" x="0.0" y="142" width="414" height="571"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="G3r-xg-mFT">
+                                <rect key="frame" x="0.0" y="142" width="414" height="700"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RoomTableViewCell" id="zkA-0R-OsK" customClass="RoomTableViewCell" customModule="Rendezvue" customModuleProvider="target">
@@ -29,72 +28,83 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="89.666666666666671"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="buG-ts-5sE">
-                                                    <rect key="frame" x="264" y="30" width="54" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Camera"/>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r65-0t-gT4">
-                                                    <rect key="frame" x="337" y="29" width="57" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Settings"/>
-                                                    <connections>
-                                                        <segue destination="Fpp-ys-uYm" kind="show" id="aeF-lP-Y5Y"/>
-                                                    </connections>
-                                                </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Room Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rKu-sn-XzZ">
-                                                    <rect key="frame" x="30" y="34" width="217" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rKu-sn-XzZ">
+                                                    <rect key="frame" x="25" y="31" width="94" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r65-0t-gT4">
+                                                    <rect key="frame" x="298" y="26" width="57" height="30"/>
+                                                    <state key="normal" title="Settings"/>
+                                                    <connections>
+                                                        <segue destination="Fpp-ys-uYm" kind="show" id="bMm-Wi-OP3"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="buG-ts-5sE">
+                                                    <rect key="frame" x="234" y="26" width="54" height="30"/>
+                                                    <state key="normal" title="Camera"/>
+                                                </button>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="rKu-sn-XzZ" firstAttribute="top" secondItem="gdY-Cw-ObP" secondAttribute="topMargin" constant="20" id="2a7-3k-nCj"/>
+                                                <constraint firstItem="buG-ts-5sE" firstAttribute="top" secondItem="gdY-Cw-ObP" secondAttribute="topMargin" constant="15" id="9Cm-4C-B6z"/>
+                                                <constraint firstAttribute="trailing" secondItem="r65-0t-gT4" secondAttribute="trailing" constant="20" id="T72-8n-XBK"/>
+                                                <constraint firstItem="r65-0t-gT4" firstAttribute="top" secondItem="gdY-Cw-ObP" secondAttribute="topMargin" constant="15" id="gMf-IP-aw6"/>
+                                                <constraint firstItem="r65-0t-gT4" firstAttribute="leading" secondItem="buG-ts-5sE" secondAttribute="trailing" constant="10" id="nuI-he-Puf"/>
+                                                <constraint firstItem="rKu-sn-XzZ" firstAttribute="leading" secondItem="gdY-Cw-ObP" secondAttribute="leadingMargin" constant="5" id="zaf-R7-RMt"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="CameraButton" destination="buG-ts-5sE" id="U3M-aW-V6e"/>
-                                            <outlet property="RoomLabel" destination="rKu-sn-XzZ" id="nbf-ro-p0F"/>
-                                            <outlet property="SettingsButton" destination="r65-0t-gT4" id="2vR-GD-ft4"/>
-                                            <outlet property="cameraButton" destination="buG-ts-5sE" id="h3x-l1-HAA"/>
                                             <outlet property="roomLabel" destination="rKu-sn-XzZ" id="ZhI-Uh-d3U"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k7o-8w-G9q">
-                                <rect key="frame" x="324" y="832" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Create"/>
-                                <connections>
-                                    <action selector="createButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XiC-Rt-5kX"/>
-                                </connections>
-                            </button>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S63-LB-Rdv">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S63-LB-Rdv">
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Username" id="sBK-v6-rnb"/>
                                 </items>
                             </navigationBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rooms" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g6i-su-947">
-                                <rect key="frame" x="20" y="100" width="91" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rooms" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g6i-su-947">
+                                <rect key="frame" x="20" y="98" width="91" height="34"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k7o-8w-G9q">
+                                <rect key="frame" x="305" y="98" width="89" height="30"/>
+                                <state key="normal" title="Create Room"/>
+                                <connections>
+                                    <action selector="createRoomButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8Cm-YI-auh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="S63-LB-Rdv" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="0ui-Gm-z5q"/>
+                            <constraint firstItem="G3r-xg-mFT" firstAttribute="top" secondItem="g6i-su-947" secondAttribute="bottom" constant="10" id="6gO-fJ-WMp"/>
+                            <constraint firstItem="G3r-xg-mFT" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="DQX-ws-l2j"/>
+                            <constraint firstItem="g6i-su-947" firstAttribute="top" secondItem="S63-LB-Rdv" secondAttribute="bottom" constant="10" id="ECl-cA-WJe"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="G3r-xg-mFT" secondAttribute="bottom" constant="20" id="HUo-bn-lbh"/>
+                            <constraint firstItem="k7o-8w-G9q" firstAttribute="top" secondItem="S63-LB-Rdv" secondAttribute="bottom" constant="10" id="MUf-vk-Xut"/>
+                            <constraint firstItem="S63-LB-Rdv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="WJb-px-ADg"/>
+                            <constraint firstItem="g6i-su-947" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="bW2-sn-6bf"/>
+                            <constraint firstItem="S63-LB-Rdv" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="dab-WP-ipt"/>
+                            <constraint firstItem="k7o-8w-G9q" firstAttribute="top" secondItem="S63-LB-Rdv" secondAttribute="bottom" constant="10" id="kQB-hF-n0h"/>
+                            <constraint firstItem="G3r-xg-mFT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="lqQ-gF-HZM"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="k7o-8w-G9q" secondAttribute="trailing" constant="20" id="t7Z-Wa-qZ0"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="roomList" destination="G3r-xg-mFT" id="p0f-qU-9Ip"/>
-                        <outlet property="titleBar" destination="S63-LB-Rdv" id="YZX-ny-6ql"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.68115942028987" y="138.61607142857142"/>
+            <point key="canvasLocation" x="136.80000000000001" y="138.17733990147784"/>
         </scene>
         <!--Room Settings View Controller-->
         <scene sceneID="0ty-l2-lSW">
@@ -104,23 +114,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tYQ-VA-hPW">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tYQ-VA-hPW">
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
-                                    <navigationItem title="Room Name" id="i2Q-6i-jaW"/>
+                                    <navigationItem title="Room Name" id="i2Q-6i-jaW">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" style="plain" id="IhF-gN-HtI">
+                                            <connections>
+                                                <segue destination="BYZ-38-t0r" kind="show" id="lEc-6X-lJj"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Item" style="plain" id="2X6-1P-Azt">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Zil-cd-SIe">
+                                                <rect key="frame" x="306" y="7" width="88" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Delete Room"/>
+                                            </button>
+                                            <connections>
+                                                <action selector="deleteRoomButton:" destination="Fpp-ys-uYm" id="CXk-0R-ZsM"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Users" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aaA-3u-rJO">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Users" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aaA-3u-rJO">
                                 <rect key="frame" x="20" y="98" width="77" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="y7y-bD-a0C">
-                                <rect key="frame" x="0.0" y="140" width="414" height="571"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Jh-uz-MHa">
+                                <rect key="frame" x="330" y="98" width="64" height="30"/>
+                                <state key="normal" title="Add User"/>
+                                <connections>
+                                    <action selector="addUserButton:" destination="Fpp-ys-uYm" eventType="touchUpInside" id="A18-u1-Vii"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="y7y-bD-a0C">
+                                <rect key="frame" x="0.0" y="142" width="414" height="700"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserTableViewCell" id="BU2-BS-6qF" customClass="UserTableViewCell" customModule="Rendezvue" customModuleProvider="target">
@@ -130,62 +160,59 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="89.666666666666671"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CER-cB-U7j">
-                                                    <rect key="frame" x="276" y="30" width="30" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="User Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bx4-hT-xur">
-                                                    <rect key="frame" x="30" y="34" width="217" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bx4-hT-xur">
+                                                    <rect key="frame" x="25" y="31" width="86" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A9G-vw-yEb">
-                                                    <rect key="frame" x="314" y="29" width="81" height="30"/>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CER-cB-U7j">
+                                                    <rect key="frame" x="276" y="30" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A9G-vw-yEb">
+                                                    <rect key="frame" x="313" y="26" width="81" height="30"/>
                                                     <state key="normal" title="Delete User"/>
                                                 </button>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="A9G-vw-yEb" firstAttribute="top" secondItem="yFx-8p-bTF" secondAttribute="topMargin" constant="15" id="B4c-YP-Zcb"/>
+                                                <constraint firstItem="Bx4-hT-xur" firstAttribute="top" secondItem="yFx-8p-bTF" secondAttribute="topMargin" constant="20" id="eit-FR-Zbx"/>
+                                                <constraint firstAttribute="trailing" secondItem="A9G-vw-yEb" secondAttribute="trailing" constant="20" id="p1r-ar-ayb"/>
+                                                <constraint firstItem="Bx4-hT-xur" firstAttribute="leading" secondItem="yFx-8p-bTF" secondAttribute="leadingMargin" constant="5" id="xEQ-Kt-qOG"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="CameraButton" destination="CER-cB-U7j" id="6Jp-UA-rGO"/>
-                                            <outlet property="RoomLabel" destination="Bx4-hT-xur" id="N61-lW-IMZ"/>
-                                            <outlet property="cameraButton" destination="CER-cB-U7j" id="xQa-d2-Ldo"/>
-                                            <outlet property="deleteUserButton" destination="A9G-vw-yEb" id="K0G-9R-UyY"/>
-                                            <outlet property="roomLabel" destination="Bx4-hT-xur" id="X7B-9W-wkY"/>
-                                            <outlet property="usernameLabel" destination="Bx4-hT-xur" id="wHy-pG-Jpn"/>
+                                            <outlet property="usernameLabel" destination="Bx4-hT-xur" id="bkC-JH-yCz"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zil-cd-SIe">
-                                <rect key="frame" x="163" y="814" width="88" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Delete Room"/>
-                                <connections>
-                                    <action selector="deleteRoomButton:" destination="Fpp-ys-uYm" eventType="touchUpInside" id="Jo2-mo-udc"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Jh-uz-MHa">
-                                <rect key="frame" x="339" y="100" width="64" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Add User"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="y7y-bD-a0C" firstAttribute="trailing" secondItem="KR1-w6-FIz" secondAttribute="trailing" id="1So-IA-JG7"/>
+                            <constraint firstItem="tYQ-VA-hPW" firstAttribute="trailing" secondItem="KR1-w6-FIz" secondAttribute="trailing" id="56e-vv-YFY"/>
+                            <constraint firstItem="2Jh-uz-MHa" firstAttribute="top" secondItem="tYQ-VA-hPW" secondAttribute="bottom" constant="10" id="EJW-Ep-lDx"/>
+                            <constraint firstItem="tYQ-VA-hPW" firstAttribute="leading" secondItem="KR1-w6-FIz" secondAttribute="leading" id="KSj-u8-fHe"/>
+                            <constraint firstItem="aaA-3u-rJO" firstAttribute="top" secondItem="tYQ-VA-hPW" secondAttribute="bottom" constant="10" id="LAA-cL-2cm"/>
+                            <constraint firstItem="y7y-bD-a0C" firstAttribute="top" secondItem="aaA-3u-rJO" secondAttribute="bottom" constant="10" id="LnR-1w-zud"/>
+                            <constraint firstItem="KR1-w6-FIz" firstAttribute="bottom" secondItem="y7y-bD-a0C" secondAttribute="bottom" constant="20" id="T7m-Xn-ass"/>
+                            <constraint firstItem="y7y-bD-a0C" firstAttribute="leading" secondItem="KR1-w6-FIz" secondAttribute="leading" id="XDc-Hk-r9C"/>
+                            <constraint firstItem="tYQ-VA-hPW" firstAttribute="top" secondItem="KR1-w6-FIz" secondAttribute="top" id="c3F-nb-bp3"/>
+                            <constraint firstItem="aaA-3u-rJO" firstAttribute="leading" secondItem="KR1-w6-FIz" secondAttribute="leading" constant="20" id="iRE-cv-n3t"/>
+                            <constraint firstItem="aaA-3u-rJO" firstAttribute="top" secondItem="tYQ-VA-hPW" secondAttribute="bottom" constant="10" id="nqd-8b-pxa"/>
+                            <constraint firstItem="KR1-w6-FIz" firstAttribute="trailing" secondItem="2Jh-uz-MHa" secondAttribute="trailing" constant="20" id="rWM-7S-esY"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="KR1-w6-FIz"/>
                     </view>
                     <connections>
-                        <outlet property="addUserButton" destination="2Jh-uz-MHa" id="aEl-C1-fvp"/>
-                        <outlet property="deleteRoomButton" destination="Zil-cd-SIe" id="kRv-nu-2JN"/>
-                        <outlet property="titleBar" destination="tYQ-VA-hPW" id="G4C-MW-st7"/>
-                        <outlet property="userList" destination="y7y-bD-a0C" id="Ur8-yJ-H05"/>
+                        <outlet property="userList" destination="y7y-bD-a0C" id="DLg-gE-FZE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xif-j3-Ycg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="872" y="139"/>
+            <point key="canvasLocation" x="871.01449275362324" y="138.61607142857142"/>
         </scene>
     </scenes>
 </document>

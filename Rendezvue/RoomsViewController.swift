@@ -10,21 +10,41 @@ import UIKit
 
 class RoomsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    @IBOutlet weak var titleBar: UINavigationBar!
+    //MARK:Properties
     @IBOutlet weak var roomList: UITableView!
-    
+    let roomNames = ["Richard's Room", "Jack's Room", "Thomas' Room", "Matthew's Room"]
+
     override func viewDidLoad() {
         super.viewDidLoad()
         roomList.delegate = self
         roomList.dataSource = self
     }
-
-    @IBAction func createButton() {
+    
+    
+    
+    //MARK: Actions
+    @IBAction func createRoomButton(_ sender: UIButton) {
+        let alert = UIAlertController(title: "What's the name of your room?", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
+        alert.addTextField(configurationHandler: { textField in
+            textField.placeholder = "Room Name"
+        })
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            
+            if let roomName = alert.textFields?.first?.text {
+                //TODO: Post room name to backend
+                if(roomName.count > 0){
+                    print("Your room name: \(roomName)")
+                }
+            }
+        }))
+        
+        self.present(alert, animated: true)
     }
     
-    let roomNames = ["Richard's Room", "Jack's Room", "Thomas' Room", "Matthew's Room"]
-    
+    //MARK: UITableViewDelegate
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -32,7 +52,6 @@ class RoomsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return roomNames.count
     }
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "RoomTableViewCell", for: indexPath) as? RoomTableViewCell else {

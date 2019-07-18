@@ -10,8 +10,8 @@ import UIKit
 
 class UserTableViewCell: UITableViewCell {
 
+
     @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var deleteUserButton: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -10,8 +10,6 @@ import UIKit
 
 class RoomTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var settingsButton: UIButton!
-    @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var roomLabel: UILabel!
     
     override func awakeFromNib() {

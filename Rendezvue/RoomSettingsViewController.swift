@@ -10,9 +10,10 @@ import UIKit
 
 class RoomSettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    @IBOutlet weak var deleteRoomButton: UIButton!
-    @IBOutlet weak var addUserButton: UIButton!
+    //MARK: Properties
     @IBOutlet weak var userList: UITableView!
+    let usernames = ["Richard", "Jack", "Thomas", "Matthew"]
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,8 +21,19 @@ class RoomSettingsViewController: UIViewController, UITableViewDelegate, UITable
         userList.dataSource = self
     }
     
-    let usernames = ["Richard", "Jack", "Thomas", "Matthew"]
+    //MARK: Actions
+    @IBAction func addUserButton(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Users", message: nil, preferredStyle: .alert)
+        
+        
+        
+        self.present(alert, animated: true)
+    }
+    @IBAction func deleteRoomButton(_ sender: UIBarButtonItem) {
+        
+    }
     
+    //MARK: UITableViewDelegate
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
