@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -66,7 +66,6 @@
 				7CFFD54343BB727F045FFED9 /* Pods-Rendezvue.debug.xcconfig */,
 				DD460B91E19E995ADAB6676D /* Pods-Rendezvue.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -115,10 +114,10 @@
 				D877DEB122DEA8DC00254781 /* AppDelegate.swift */,
 				D877DEB322DEA8DC00254781 /* RoomsViewController.swift */,
 				D877DEB522DEA8DC00254781 /* Main.storyboard */,
+				D877DEC322DEADA000254781 /* CameraViewController.swift */,
 				D877DECD22DECA6500254781 /* RoomSettingsViewController.swift */,
 				D877DECB22DEC94800254781 /* UserTableViewCell.swift */,
 				D877DEC722DEB7A200254781 /* RoomTableViewCell.swift */,
-				D877DEC322DEADA000254781 /* CameraViewController.swift */,
 				D877DEB822DEA8E300254781 /* Assets.xcassets */,
 				D877DEBA22DEA8E300254781 /* LaunchScreen.storyboard */,
 				D877DEBD22DEA8E300254781 /* Info.plist */,
