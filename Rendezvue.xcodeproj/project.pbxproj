@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		972095F45D16DA618FCA3D75 /* Pods_Rendezvue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2713D4F909A863269B67058D /* Pods_Rendezvue.framework */; };
 		CE46D7F722DFF746009E5648 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE46D7F622DFF746009E5648 /* Room.swift */; };
 		CE46D7FA22E1427A009E5648 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE46D7F922E1427A009E5648 /* Observer.swift */; };
 		CE46D7FC22E1462A009E5648 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE46D7FB22E1462A009E5648 /* Location.swift */; };
@@ -25,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2713D4F909A863269B67058D /* Pods_Rendezvue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rendezvue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7CFFD54343BB727F045FFED9 /* Pods-Rendezvue.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rendezvue.debug.xcconfig"; path = "Target Support Files/Pods-Rendezvue/Pods-Rendezvue.debug.xcconfig"; sourceTree = "<group>"; };
 		CE46D7F622DFF746009E5648 /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		CE46D7F922E1427A009E5648 /* Observer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
 		CE46D7FB22E1462A009E5648 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -42,6 +45,7 @@
 		D877DEC722DEB7A200254781 /* RoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomTableViewCell.swift; sourceTree = "<group>"; };
 		D877DECB22DEC94800254781 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		D877DECD22DECA6500254781 /* RoomSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomSettingsViewController.swift; sourceTree = "<group>"; };
+		DD460B91E19E995ADAB6676D /* Pods-Rendezvue.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rendezvue.release.xcconfig"; path = "Target Support Files/Pods-Rendezvue/Pods-Rendezvue.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,12 +53,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				972095F45D16DA618FCA3D75 /* Pods_Rendezvue.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D9F5B015C34063336784125 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7CFFD54343BB727F045FFED9 /* Pods-Rendezvue.debug.xcconfig */,
+				DD460B91E19E995ADAB6676D /* Pods-Rendezvue.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		CE46D7F822E02052009E5648 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -79,6 +94,8 @@
 			children = (
 				D877DEB022DEA8DC00254781 /* Rendezvue */,
 				D877DEAF22DEA8DC00254781 /* Products */,
+				3D9F5B015C34063336784125 /* Pods */,
+				DDE06D95FAB97F1A78BAA53E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -110,6 +127,14 @@
 			path = Rendezvue;
 			sourceTree = "<group>";
 		};
+		DDE06D95FAB97F1A78BAA53E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2713D4F909A863269B67058D /* Pods_Rendezvue.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -117,9 +142,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D877DEC022DEA8E300254781 /* Build configuration list for PBXNativeTarget "Rendezvue" */;
 			buildPhases = (
+				81FFF6C2213DCFDF0AFA154B /* [CP] Check Pods Manifest.lock */,
 				D877DEAA22DEA8DC00254781 /* Sources */,
 				D877DEAB22DEA8DC00254781 /* Frameworks */,
 				D877DEAC22DEA8DC00254781 /* Resources */,
+				202639E59564A5B48A18CDF0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -175,6 +202,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		202639E59564A5B48A18CDF0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Rendezvue/Pods-Rendezvue-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Rendezvue/Pods-Rendezvue-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Rendezvue/Pods-Rendezvue-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		81FFF6C2213DCFDF0AFA154B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Rendezvue-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D877DEAA22DEA8DC00254781 /* Sources */ = {
@@ -336,6 +405,7 @@
 		};
 		D877DEC122DEA8E300254781 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7CFFD54343BB727F045FFED9 /* Pods-Rendezvue.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -355,6 +425,7 @@
 		};
 		D877DEC222DEA8E300254781 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DD460B91E19E995ADAB6676D /* Pods-Rendezvue.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
