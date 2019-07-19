@@ -8,7 +8,8 @@
 
 import UIKit
 
-class RoomsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class RoomsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, Observer {
+    var id = Int()
 
     //MARK:Properties
     @IBOutlet weak var roomList: UITableView!
@@ -19,6 +20,8 @@ class RoomsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         roomList.delegate = self
         roomList.dataSource = self
         
+        self.id = 1
+        Room.sharedInstance.attachObserver(observer: self)
         Room.sharedInstance.getRooms()
     }
     
@@ -67,5 +70,8 @@ class RoomsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return cell
     }
     
+    func update() {
+        print(Room.sharedInstance.rooms)
+    }
 }
 

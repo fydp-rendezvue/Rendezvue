@@ -40,7 +40,7 @@ class Room {
             }
             
             //check status code
-            // guard let checks if two conditions eavl to false
+            // guard let checks if two conditions eval to false
             guard let httpResponse = response as? HTTPURLResponse,
                 httpResponse.statusCode == 200 else {
 //                self.handleServerError(response)
@@ -63,6 +63,7 @@ class Room {
                         let roomStruct = RoomStruct(roomId: roomId, roomName: roomName)
                         self.rooms[roomId] = roomStruct
                     }
+                    self.notify()
                 }
             } catch {
                 print("JSON error: \(error.localizedDescription)")
@@ -75,5 +76,29 @@ class Room {
     
     private init() {
         print("Initializing Room")
+    }
+
+    //observer setup
+    private var observerArray = [Observer]()
+    private var _number = Int()
+    var number : Int {
+        set {
+            _number = newValue
+            notify()
+        }
+        
+        get {
+            return _number
+        }
+    }
+    
+    func attachObserver(observer : Observer) {
+        observerArray.append(observer)
+    }
+    
+    private func notify() {
+        for observer in observerArray {
+            observer.update()
+        }
     }
 }
