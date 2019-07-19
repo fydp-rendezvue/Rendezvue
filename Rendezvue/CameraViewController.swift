@@ -15,11 +15,22 @@ import AVFoundation
 class CameraViewController: UIViewController {
     
     var sceneLocationView = SceneLocationView()
+    var locationManager = CLLocationManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         sceneLocationView.showAxesNode = true
         sceneLocationView.showFeaturePoints = true
+        
+        // Location manager settings for higher accuracy
+        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+        locationManager.distanceFilter = kCLDistanceFilterNone
+        locationManager.headingFilter = kCLHeadingFilterNone
+        locationManager.pausesLocationUpdatesAutomatically = false
+        locationManager.startUpdatingHeading()
+        locationManager.startUpdatingLocation()
+        locationManager.requestWhenInUseAuthorization()
         
         let button = UIButton(frame: CGRect(x: view.frame.midX, y: UIScreen.main.bounds.height * 0.85, width: 100, height: 50))
         button.backgroundColor = .blue
