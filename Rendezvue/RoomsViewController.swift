@@ -21,8 +21,12 @@ class RoomsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         roomList.dataSource = self
         
         self.id = 1
-        Room.sharedInstance.attachObserver(observer: self)
+        Room.sharedInstance.observerSubject.attachObserver(observer: self)
         Room.sharedInstance.getRooms()
+        
+        Location.sharedInstance.observerSubject.attachObserver(observer: self)
+        Location.sharedInstance.getSharedMarkers(roomId: 1)
+        Location.sharedInstance.postSharedMarker(roomId: 1, longitude: 5.34, latitude: 32.3, altitude: 234.12)
     }
     
     
@@ -72,6 +76,7 @@ class RoomsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func update() {
         print(Room.sharedInstance.rooms)
+        print(Location.sharedInstance.locations)
     }
 }
 

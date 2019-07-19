@@ -1,10 +1,12 @@
 //
-//  Model.swift
+//  User.swift
 //  Rendezvue
 //
 //  Created by Matthew Kim on 2019-07-18.
 //  Copyright © 2019 Rendezvue. All rights reserved.
 //
+
+//**** NEED TO UPDATE THIS FILE WITH THE LATEST OBSERVER IMPLEMENTATION AND TEST
 
 import Foundation
 

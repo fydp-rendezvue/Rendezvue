@@ -1,5 +1,5 @@
 //
-//  Model.swift
+//  Room.swift
 //  Rendezvue
 //
 //  Created by Jack Lin on 2019-07-17.
@@ -21,12 +21,17 @@ struct RoomStruct {
 class Room {
     //instantiated on first access
     static let sharedInstance = Room()
+    let observerSubject = ObserverSubject()
     
     let currentUserId:Int = 1;
     var rooms:[Int:RoomStruct] = [:];
     
+    private init() {
+        print("Initializing Room")
+    }
+    
     func getRooms() {
-        let requestUrl = "https://b86719c3.ngrok.io/users/\(currentUserId)/rooms"
+        let requestUrl = "\(Constants.url)/users/\(currentUserId)/rooms"
         let session = URLSession.shared
         let url = URL(string: requestUrl)!
         
@@ -63,7 +68,7 @@ class Room {
                         let roomStruct = RoomStruct(roomId: roomId, roomName: roomName)
                         self.rooms[roomId] = roomStruct
                     }
-                    self.notify()
+                    self.observerSubject.notify()
                 }
             } catch {
                 print("JSON error: \(error.localizedDescription)")
@@ -72,33 +77,5 @@ class Room {
         
         //actually make the api call
         task.resume()
-    }
-    
-    private init() {
-        print("Initializing Room")
-    }
-
-    //observer setup
-    private var observerArray = [Observer]()
-    private var _number = Int()
-    var number : Int {
-        set {
-            _number = newValue
-            notify()
-        }
-        
-        get {
-            return _number
-        }
-    }
-    
-    func attachObserver(observer : Observer) {
-        observerArray.append(observer)
-    }
-    
-    private func notify() {
-        for observer in observerArray {
-            observer.update()
-        }
     }
 }
