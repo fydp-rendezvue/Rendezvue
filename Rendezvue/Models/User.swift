@@ -2,31 +2,36 @@
 //  Model.swift
 //  Rendezvue
 //
-//  Created by Jack Lin on 2019-07-17.
+//  Created by Matthew Kim on 2019-07-18.
 //  Copyright © 2019 Rendezvue. All rights reserved.
 //
 
 import Foundation
 
-struct RoomStruct {
-    var roomId:Int = -1
-    var roomName:String = ""
+struct UserStruct {
+    var userId:Int = -1
+    var username:String = ""
+    var firstName:String = ""
+    var lastName:String = ""
+    var password:String = ""
     
-    init(roomId: Int, roomName: String) {
-        self.roomId = roomId
-        self.roomName = roomName
+    init(userId: Int, username: String, firstName: String, lastName: String, password: String) {
+        self.userId = userId
+        self.username = username
+        self.firstName = firstName
+        self.lastName = lastName
+        self.password = password
     }
 }
 
-class Room {
+class User {
     //instantiated on first access
-    static let sharedInstance = Room()
+    static let sharedInstance = User()
+
+    var users:[Int:UserStruct] = [:];
     
-    let currentUserId:Int = 1;
-    var rooms:[Int:RoomStruct] = [:];
-    
-    func getRooms() {
-        let requestUrl = "https://b86719c3.ngrok.io/users/\(currentUserId)/rooms"
+    func getUsers() {
+        let requestUrl = "https://44066b6c.ngrok.io/users/"
         let session = URLSession.shared
         let url = URL(string: requestUrl)!
         
@@ -56,12 +61,15 @@ class Room {
             
             do {
                 if let jsonArray = try JSONSerialization.jsonObject(with: data!, options: []) as? [[String: Any]] {
-                    for roomInfo in jsonArray {
-                        guard let roomId = roomInfo["roomId"] as? Int else { return }
-                        guard let roomName = roomInfo["roomName"] as? String else { return }
+                    for userInfo in jsonArray {
+                        guard let userId = userInfo["userId"] as? Int else { return }
+                        guard let username = userInfo["username"] as? String else { return }
+                        guard let firstName = userInfo["firstName"] as? String else { return }
+                        guard let lastName = userInfo["lastName"] as? String else { return }
+                        guard let password = userInfo["password"] as? String else { return }
                         
-                        let roomStruct = RoomStruct(roomId: roomId, roomName: roomName)
-                        self.rooms[roomId] = roomStruct
+                        let userStruct = UserStruct(userId: userId, username: username, firstName: firstName, lastName: lastName, password: password)
+                        self.users[userId] = userStruct
                     }
                     self.notify()
                 }
@@ -75,7 +83,7 @@ class Room {
     }
     
     private init() {
-        print("Initializing Room")
+        print("Initializing User")
     }
 
     //observer setup
