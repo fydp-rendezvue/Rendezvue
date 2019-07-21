@@ -12,7 +12,9 @@ import CoreLocation
 import UIKit
 import AVFoundation
 
-class CameraViewController: UIViewController {
+class CameraViewController: UIViewController, Observer {
+    var id = Int()
+    
     
     var sceneLocationView = SceneLocationView()
     var locationManager = CLLocationManager()
@@ -32,7 +34,7 @@ class CameraViewController: UIViewController {
         locationManager.startUpdatingLocation()
         locationManager.requestWhenInUseAuthorization()
         
-        let button = UIButton(frame: CGRect(x: view.frame.midX, y: UIScreen.main.bounds.height * 0.85, width: 100, height: 50))
+        let button = UIButton(frame: CGRect(x: (view.frame.width - 100)/2, y: UIScreen.main.bounds.height * 0.85, width: 100, height: 50))
         button.backgroundColor = .blue
         button.setTitle("Add", for: .normal)
         button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
@@ -40,6 +42,9 @@ class CameraViewController: UIViewController {
         sceneLocationView.addSubview(button)
         
         view.addSubview(sceneLocationView)
+        
+        Location.sharedInstance.observerSubject.attachObserver(observer: self)
+        Location.sharedInstance.getSharedMarkers(roomId: 1)
     }
     
     @objc func buttonAction(sender: UIButton!) {
@@ -50,6 +55,12 @@ class CameraViewController: UIViewController {
         annotationNode.scaleRelativeToDistance = false
         
         sceneLocationView.addLocationNodeForCurrentPosition(locationNode: annotationNode)
+        
+        let current_longitude = sceneLocationView.sceneLocationManager.currentLocation?.coordinate.longitude ?? 0.0
+        let current_latitude = sceneLocationView.sceneLocationManager.currentLocation?.coordinate.latitude ?? 0.0
+        let current_altitude = sceneLocationView.sceneLocationManager.currentLocation?.altitude ?? 0.0
+        
+        Location.sharedInstance.postSharedMarker(roomId: 1, longitude: current_longitude, latitude: current_latitude, altitude: current_altitude)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -73,5 +84,21 @@ class CameraViewController: UIViewController {
             }
             return
         }
+        for (_, loc_struct) in Location.sharedInstance.locations {
+            let longitude = CLLocationDegrees(exactly: loc_struct.longitude as NSNumber)
+            let latitude = CLLocationDegrees(exactly: loc_struct.latitude as NSNumber)
+            let altitude = CLLocationDegrees(exactly: loc_struct.altitude as NSNumber)
+            let coordinate = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
+            let location = CLLocation(coordinate: coordinate, altitude: altitude!)
+            let image = UIImage(named:"pin")!
+            
+            let annotationNode = LocationAnnotationNode(location: location, image: image)
+            annotationNode.scaleRelativeToDistance = true
+            self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode)
+        }
+    }
+    
+    func update() {
+        print("Something")
     }
 }

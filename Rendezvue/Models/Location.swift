@@ -59,7 +59,7 @@ class Location {
             print("responseString = \(responseString!)")
             let json = try! JSONSerialization.jsonObject(with: data, options: []) as! [String:Any]
             let results = json["results"] as! [[String:Any]]
-
+ 
             results.forEach{
                 guard let locationId = $0["locationId"] as? Int else { print("Invalid locationId Type"); return }
                 guard let longitude = $0["longitude"] as? Double else { print("Invalid longitude Type"); return }
@@ -67,6 +67,7 @@ class Location {
                 guard let altitude = $0["altitude"] as? Double else { print("Invalid altitude Type"); return }
                 guard let markerMetaData = $0["markerMetadata"] as? String else { print("Invalid markerMetadata Type"); return }
                 
+                // Duplicate usage of location id, one should be pruned
                 let locationStruct = LocationStruct(locationId: locationId, longitude: longitude, latitude: latitude, altitude: altitude, markerMetadata: markerMetaData)
                 
                 self.locations[locationId] = locationStruct
