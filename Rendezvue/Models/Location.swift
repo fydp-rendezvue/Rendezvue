@@ -28,7 +28,6 @@ class Location {
     static let sharedInstance = Location()
     let observerSubject = ObserverSubject()
     
-    let currentUserId:Int = 1;
     var locations:[Int:LocationStruct] = [:]
     
     private init() {
@@ -36,7 +35,7 @@ class Location {
     }
     
     func getSharedMarkers(roomId:Int) {
-        let urlString = "\(Constants.url)/users/\(currentUserId)/rooms/\(roomId)/markers"
+        let urlString = "\(Constants.url)/users/\(User.sharedInstance.currentUserId)/rooms/\(roomId)/markers"
         let url = URL(string: urlString)
         var request = URLRequest(url: url!)
         request.httpMethod = "GET"
@@ -80,7 +79,7 @@ class Location {
     
     // TODO: need to add the markerMetadata
     func postSharedMarker(roomId : Int, longitude : Double, latitude : Double, altitude : Double){
-        let urlString = "\(Constants.url)/users/\(currentUserId)/rooms/\(roomId)/marker"
+        let urlString = "\(Constants.url)/users/\(User.sharedInstance.currentUserId)/rooms/\(roomId)/marker"
         let url = URL(string: urlString)
         var request = URLRequest(url: url!)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")

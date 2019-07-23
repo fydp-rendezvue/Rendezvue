@@ -23,7 +23,6 @@ class Room {
     static let sharedInstance = Room()
     let observerSubject = ObserverSubject()
     
-    let currentUserId:Int = 1;
     var rooms:[Int:RoomStruct] = [:];
     
     private init() {
@@ -31,7 +30,7 @@ class Room {
     }
     
     func getRooms() {
-        let requestUrl = "\(Constants.url)/users/\(currentUserId)/rooms"
+        let requestUrl = "\(Constants.url)/users/\(User.sharedInstance.currentUserId)/rooms"
         let session = URLSession.shared
         let url = URL(string: requestUrl)!
         

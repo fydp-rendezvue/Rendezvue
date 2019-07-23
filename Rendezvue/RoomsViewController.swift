@@ -23,6 +23,8 @@ class RoomsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.id = 1
         Room.sharedInstance.observerSubject.attachObserver(observer: self)
         Room.sharedInstance.getRooms()
+        
+        User.sharedInstance.getUsersInRoom(roomId: 1)
     }
     
     
