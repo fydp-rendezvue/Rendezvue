@@ -79,7 +79,7 @@ class Room {
     }
     
     func postRoom(roomName : String){
-        let urlString = "\(Constants.url)/users/\(currentUserId)/rooms"
+        let urlString = "\(Constants.url)/users/\(User.sharedInstance.currentUserId)/rooms"
         let url = URL(string: urlString)
         var request = URLRequest(url: url!)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -103,6 +103,9 @@ class Room {
                 print("response = \(response)")
                 return
             }
+            
+            let responseString = String(data: data, encoding: .utf8)
+            print("responseString = \(responseString!)")
             
             self.observerSubject.notify() //use this to update UI so user know marker is saved correctly
         }

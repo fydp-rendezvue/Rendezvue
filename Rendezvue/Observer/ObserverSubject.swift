@@ -8,17 +8,7 @@
 
 class ObserverSubject {
     private var observerArray = [Observer]()
-    private var _number = Int()
-    var number : Int {
-        set {
-            _number = newValue
-            notify()
-        }
-        
-        get {
-            return _number
-        }
-    }
+
     
     func attachObserver(observer : Observer) {
         observerArray.append(observer)

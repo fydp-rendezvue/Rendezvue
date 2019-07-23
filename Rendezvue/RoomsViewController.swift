@@ -20,11 +20,8 @@ class RoomsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         roomList.delegate = self
         roomList.dataSource = self
         
-        self.id = 1
         Room.sharedInstance.observerSubject.attachObserver(observer: self)
         Room.sharedInstance.getRooms()
-        
-        User.sharedInstance.getUsersInRoom(roomId: 1)
     }
     
     

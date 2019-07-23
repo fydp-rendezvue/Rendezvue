@@ -8,17 +8,21 @@
 
 import UIKit
 
-class RoomSettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class RoomSettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, Observer {
 
     //MARK: Properties
     @IBOutlet weak var userList: UITableView!
-    let usernames = ["Richard", "Jack", "Thomas", "Matthew"]
+    var usernames = [String]()
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         userList.delegate = self
         userList.dataSource = self
+        
+        User.sharedInstance.observerSubject.attachObserver(observer: self)
+        //TODO: Pass roomid from one view to another
+        User.sharedInstance.getUsersInRoom(roomId: 1)
+        
     }
     
     //MARK: Actions
@@ -51,5 +55,20 @@ class RoomSettingsViewController: UIViewController, UITableViewDelegate, UITable
         
         return cell
     }
-
+    
+    func getUsersInRoom() {
+        let usersInRoom = User.sharedInstance.usersInRoom
+        usernames = [String]()
+        for user in usersInRoom {
+            usernames.append(user.value.username)
+        }
+        usernames.sort()
+    }
+    
+    func update() {
+        getUsersInRoom()
+        DispatchQueue.main.async {
+            self.userList.reloadData()
+        }
+    }
 }

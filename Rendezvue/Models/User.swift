@@ -28,8 +28,8 @@ class User {
     let observerSubject = ObserverSubject()
     
     let currentUserId = 1;
-    var users:[Int:UserStruct] = [:];
-    var usersInRoom:[Int:[UserStruct]] = [:];
+    var allUsers:[Int:UserStruct] = [:];
+    var usersInRoom:[Int:UserStruct] = [:];
     
     private init() {
         print("Initializing User")
@@ -66,7 +66,6 @@ class User {
             
             do {
                 if let jsonArray = try JSONSerialization.jsonObject(with: data!, options: []) as? [[String: Any]] {
-                    var users: [UserStruct] = []
                     for userInfo in jsonArray {
                         guard let userId = userInfo["userId"] as? Int else { return }
                         guard let username = userInfo["username"] as? String else { return }
@@ -74,10 +73,9 @@ class User {
                         guard let lastName = userInfo["lastName"] as? String else { return }
                         
                         let userStruct = UserStruct(userId: userId, username: username, firstName: firstName, lastName: lastName)
-                        users.append(userStruct)
+                        self.usersInRoom[userId] = userStruct
                     }
-                    self.usersInRoom[roomId] = users
-                    
+
                     self.observerSubject.notify()
                 }
             } catch {
@@ -89,7 +87,7 @@ class User {
         task.resume()
     }
     
-    func getUsers() {
+    func getAllUsers() {
         let requestUrl = "\(Constants.url)/users"
         let session = URLSession.shared
         let url = URL(string: requestUrl)!
@@ -127,7 +125,7 @@ class User {
                         guard let lastName = userInfo["lastName"] as? String else { return }
                         
                         let userStruct = UserStruct(userId: userId, username: username, firstName: firstName, lastName: lastName)
-                        self.users[userId] = userStruct
+                        self.allUsers[userId] = userStruct
                     }
                     
                     self.observerSubject.notify()
