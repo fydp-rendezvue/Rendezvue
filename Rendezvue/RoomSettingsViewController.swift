@@ -25,8 +25,6 @@ class RoomSettingsViewController: UIViewController, UITableViewDelegate, UITable
     @IBAction func addUserButton(_ sender: UIButton) {
         let alert = UIAlertController(title: "Users", message: nil, preferredStyle: .alert)
         
-        
-        
         self.present(alert, animated: true)
     }
     @IBAction func deleteRoomButton(_ sender: UIBarButtonItem) {
