@@ -13,8 +13,8 @@ class RoomsViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     //MARK:Properties
     @IBOutlet weak var roomList: UITableView!
-    let roomNames = ["Richard's Room", "Jack's Room", "Thomas' Room", "Matthew's Room"]
-
+    var roomNames = [String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         roomList.delegate = self
@@ -41,7 +41,8 @@ class RoomsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             if let roomName = alert.textFields?.first?.text {
                 //TODO: Post room name to backend
                 if(roomName.count > 0){
-                    print("Your room name: \(roomName)")
+                    Room.sharedInstance.postRoom(roomName: roomName)
+                    Room.sharedInstance.getRooms()
                 }
             }
         }))
@@ -70,9 +71,20 @@ class RoomsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return cell
     }
     
+    func getRoomNames() {
+        let rooms = Room.sharedInstance.rooms
+        roomNames = [String]()
+        for room in rooms {
+            roomNames.append(room.value.roomName)
+        }
+        roomNames.sort()
+    }
+    
     func update() {
-        print(Room.sharedInstance.rooms)
-        print(Location.sharedInstance.locations)
+        getRoomNames()
+        DispatchQueue.main.async {
+            self.roomList.reloadData()
+        }
     }
 }
 

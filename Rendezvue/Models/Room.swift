@@ -78,4 +78,36 @@ class Room {
         //actually make the api call
         task.resume()
     }
+    
+    func postRoom(roomName : String){
+        let urlString = "\(Constants.url)/users/\(currentUserId)/rooms"
+        let url = URL(string: urlString)
+        var request = URLRequest(url: url!)
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "POST"
+        let parameters: [String: String] = [
+            "roomName": roomName
+        ]
+        guard let httpBody = try? JSONSerialization.data(withJSONObject:  parameters, options: []) else { return }
+        request.httpBody = httpBody
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data,
+                let response = response as? HTTPURLResponse,
+                error == nil else {
+                    print("error", error ?? "Unknown error")
+                    return
+            }
+            
+            guard (200 ... 299) ~= response.statusCode else {
+                print("statusCode should be 2xx, but is \(response.statusCode)")
+                print("response = \(response)")
+                return
+            }
+            
+            self.observerSubject.notify() //use this to update UI so user know marker is saved correctly
+        }
+        
+        task.resume()
+    }
 }
