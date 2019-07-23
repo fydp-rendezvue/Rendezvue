@@ -39,6 +39,7 @@ class User {
         let requestUrl = "\(Constants.url)/users/\(currentUserId)/rooms/\(roomId)/usersInRoom"
         let session = URLSession.shared
         let url = URL(string: requestUrl)!
+        usersInRoom = [:]
         
         //completionHandler in this case is a callback method
         let task = session.dataTask(with: url, completionHandler: { data, response, error in
@@ -63,6 +64,9 @@ class User {
                 print("Wrong MIME type")
                 return
             }
+
+            let responseString = String(data: data!, encoding: .utf8)
+            print("responseString = \(responseString!)")
             
             do {
                 if let jsonArray = try JSONSerialization.jsonObject(with: data!, options: []) as? [[String: Any]] {
@@ -75,6 +79,7 @@ class User {
                         let userStruct = UserStruct(userId: userId, username: username, firstName: firstName, lastName: lastName)
                         self.usersInRoom[userId] = userStruct
                     }
+                    
 
                     self.observerSubject.notify()
                 }

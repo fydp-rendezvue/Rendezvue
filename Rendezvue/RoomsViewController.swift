@@ -9,11 +9,9 @@
 import UIKit
 
 class RoomsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, Observer {
-    var id = Int()
-
     //MARK:Properties
     @IBOutlet weak var roomList: UITableView!
-    var roomNames = [String]()
+    var roomStructs = [RoomStruct]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +22,15 @@ class RoomsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         Room.sharedInstance.getRooms()
     }
     
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "settingsSegue") {
+            let vc = segue.destination as! RoomSettingsViewController
+            
+            let tableViewCell = (sender as! UIButton).superview?.superview as! RoomTableViewCell
+            vc.roomId = tableViewCell.identifier
+        }
+    }
     
     
     //MARK: Actions
@@ -55,7 +62,7 @@ class RoomsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return roomNames.count
+        return roomStructs.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -63,20 +70,21 @@ class RoomsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             fatalError("The dequeued cell is not an instance of RoomTableViewCell.")
         }
         
-        let roomName = roomNames[indexPath.row]
+        let roomName = roomStructs[indexPath.row].roomName
+        let roomId = roomStructs[indexPath.row].roomId
         
         cell.roomLabel.text = roomName
+        cell.identifier = roomId
         
         return cell
     }
     
     func getRoomNames() {
         let rooms = Room.sharedInstance.rooms
-        roomNames = [String]()
+        roomStructs = [RoomStruct]()
         for room in rooms {
-            roomNames.append(room.value.roomName)
+            roomStructs.append(room.value)
         }
-        roomNames.sort()
     }
     
     func update() {

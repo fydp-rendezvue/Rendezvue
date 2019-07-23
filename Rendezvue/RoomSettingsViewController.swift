@@ -13,6 +13,7 @@ class RoomSettingsViewController: UIViewController, UITableViewDelegate, UITable
     //MARK: Properties
     @IBOutlet weak var userList: UITableView!
     var usernames = [String]()
+    var roomId = Int()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,8 +21,7 @@ class RoomSettingsViewController: UIViewController, UITableViewDelegate, UITable
         userList.dataSource = self
         
         User.sharedInstance.observerSubject.attachObserver(observer: self)
-        //TODO: Pass roomid from one view to another
-        User.sharedInstance.getUsersInRoom(roomId: 1)
+        User.sharedInstance.getUsersInRoom(roomId: roomId)
         
     }
     

@@ -38,14 +38,14 @@
                                                     <rect key="frame" x="337" y="26" width="57" height="30"/>
                                                     <state key="normal" title="Settings"/>
                                                     <connections>
-                                                        <segue destination="Fpp-ys-uYm" kind="show" id="bMm-Wi-OP3"/>
+                                                        <segue destination="Fpp-ys-uYm" kind="show" identifier="settingsSegue" id="bMm-Wi-OP3"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="buG-ts-5sE">
                                                     <rect key="frame" x="273" y="26" width="54" height="30"/>
                                                     <state key="normal" title="Camera"/>
                                                     <connections>
-                                                        <segue destination="S5q-hr-zyt" kind="show" id="kOg-oG-f59"/>
+                                                        <segue destination="S5q-hr-zyt" kind="show" identifier="cameraSegue" id="kOg-oG-f59"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -60,6 +60,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="roomLabel" destination="rKu-sn-XzZ" id="ZhI-Uh-d3U"/>
+                                            <outlet property="settingsButton" destination="r65-0t-gT4" id="9De-7F-8Zv"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

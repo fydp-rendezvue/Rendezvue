@@ -11,6 +11,9 @@ import UIKit
 class RoomTableViewCell: UITableViewCell {
     
     @IBOutlet weak var roomLabel: UILabel!
+    @IBOutlet weak var settingsButton: UIButton!
+    
+    var identifier: Int!
     
     override func awakeFromNib() {
         super.awakeFromNib()
