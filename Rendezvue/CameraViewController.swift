@@ -14,7 +14,7 @@ import AVFoundation
 
 class CameraViewController: UIViewController, Observer {
     var id = Int()
-    
+    var roomId = Int()
     
     var sceneLocationView = SceneLocationView()
     var locationManager = CLLocationManager()
@@ -26,7 +26,7 @@ class CameraViewController: UIViewController, Observer {
         sceneLocationView.showFeaturePoints = true
 
         Location.sharedInstance.observerSubject.attachObserver(observer: self)
-        Location.sharedInstance.getSharedMarkers(roomId: 1)
+        Location.sharedInstance.getSharedMarkers(roomId: roomId)
         
         // Location manager settings for higher accuracy
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation

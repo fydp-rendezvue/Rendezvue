@@ -29,6 +29,11 @@ class RoomsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             let tableViewCell = (sender as! UIButton).superview?.superview as! RoomTableViewCell
             vc.roomId = tableViewCell.identifier
+        } else if (segue.identifier == "cameraSegue"){
+            let vc = segue.destination as! CameraViewController
+            
+            let tableViewCell = (sender as! UIButton).superview?.superview as! RoomTableViewCell
+            vc.roomId = tableViewCell.identifier
         }
     }
     
