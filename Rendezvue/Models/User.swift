@@ -11,14 +11,10 @@ import Foundation
 struct UserStruct {
     var userId:Int = -1
     var username:String = ""
-    var firstName:String = ""
-    var lastName:String = ""
     
-    init(userId: Int, username: String, firstName: String, lastName: String) {
+    init(userId: Int, username: String) {
         self.userId = userId
         self.username = username
-        self.firstName = firstName
-        self.lastName = lastName
     }
 }
 
@@ -73,10 +69,8 @@ class User {
                     for userInfo in jsonArray {
                         guard let userId = userInfo["userId"] as? Int else { return }
                         guard let username = userInfo["username"] as? String else { return }
-                        guard let firstName = userInfo["firstName"] as? String else { return }
-                        guard let lastName = userInfo["lastName"] as? String else { return }
                         
-                        let userStruct = UserStruct(userId: userId, username: username, firstName: firstName, lastName: lastName)
+                        let userStruct = UserStruct(userId: userId, username: username)
                         self.usersInRoom[userId] = userStruct
                     }
                     
@@ -126,10 +120,8 @@ class User {
                     for userInfo in jsonArray {
                         guard let userId = userInfo["userId"] as? Int else { return }
                         guard let username = userInfo["username"] as? String else { return }
-                        guard let firstName = userInfo["firstName"] as? String else { return }
-                        guard let lastName = userInfo["lastName"] as? String else { return }
                         
-                        let userStruct = UserStruct(userId: userId, username: username, firstName: firstName, lastName: lastName)
+                        let userStruct = UserStruct(userId: userId, username: username)
                         self.allUsers[userId] = userStruct
                     }
                     
