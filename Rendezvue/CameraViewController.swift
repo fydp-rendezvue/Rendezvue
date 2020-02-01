@@ -22,7 +22,7 @@ class CameraViewController: UIViewController, Observer {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        sceneLocationView.showAxesNode = true
+        // sceneLocationView.showAxesNode = true
         sceneLocationView.showFeaturePoints = true
 
         Location.sharedInstance.observerSubject.attachObserver(observer: self)
@@ -41,6 +41,7 @@ class CameraViewController: UIViewController, Observer {
         button.backgroundColor = .blue
         button.setTitle("Add", for: .normal)
         button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        button.addTarget(self, action: #selector(releaseAction), for: .touchDown)
 
         let backButton = UIButton(frame: CGRect(x: (view.frame.width - 70) * 1/20, y: UIScreen.main.bounds.height * 0.05, width: 70, height: 30))
         backButton.setTitle("Back", for: .normal)
@@ -49,6 +50,7 @@ class CameraViewController: UIViewController, Observer {
         let getMarkerButton = UIButton(frame: CGRect(x: (view.frame.width - 70) * 19/20, y: UIScreen.main.bounds.height * 0.05, width: 70, height: 30))
         getMarkerButton.setTitle("Get Pins", for: .normal)
         getMarkerButton.addTarget(self, action: #selector(getPinsAction), for: .touchUpInside)
+        getMarkerButton.addTarget(self, action: #selector(releasePinsAction), for: .touchDown)
         
         sceneLocationView.addSubview(getMarkerButton)
         sceneLocationView.addSubview(button)
@@ -63,6 +65,10 @@ class CameraViewController: UIViewController, Observer {
     }
     
     @objc func getPinsAction(sender: UIButton!) {
+        sender.setTitleColor(.white, for: UIControl.State.normal)
+    }
+    
+    @objc func releasePinsAction(sender: UIButton!) {
         for (_, loc_struct) in Location.sharedInstance.locations {
             let longitude = CLLocationDegrees(exactly: loc_struct.longitude as NSNumber)
             let latitude = CLLocationDegrees(exactly: loc_struct.latitude as NSNumber)
@@ -76,9 +82,9 @@ class CameraViewController: UIViewController, Observer {
             self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode)
             print("Pin added")
         }
+        sender.setTitleColor(.red, for: UIControl.State.normal)
         self.sceneLocationView.setNeedsDisplay()
     }
-    
     
     @objc func backAction(sender: UIButton!) {
         let roomsRV = self.storyboard?.instantiateViewController(withIdentifier: "RoomsViewController") as! RoomsViewController
@@ -88,6 +94,7 @@ class CameraViewController: UIViewController, Observer {
     }
     
     @objc func buttonAction(sender: UIButton!) {
+        sender.backgroundColor = .blue
         print("Button tapped")
         
         let image = UIImage(named: "pin")!
@@ -100,7 +107,11 @@ class CameraViewController: UIViewController, Observer {
         let current_latitude = sceneLocationView.sceneLocationManager.currentLocation?.coordinate.latitude ?? 0.0
         let current_altitude = sceneLocationView.sceneLocationManager.currentLocation?.altitude ?? 0.0
         
-        Location.sharedInstance.postSharedMarker(roomId: 1, longitude: current_longitude, latitude: current_latitude, altitude: current_altitude)
+        Location.sharedInstance.postSharedMarker(roomId: roomId, longitude: current_longitude, latitude: current_latitude, altitude: current_altitude)
+    }
+    
+    @objc func releaseAction(sender: UIButton!) {
+        sender.backgroundColor = .red
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -124,6 +135,13 @@ class CameraViewController: UIViewController, Observer {
             }
             return
         }
+        let current_longitude = sceneLocationView.sceneLocationManager.currentLocation?.coordinate.longitude ?? 0.0
+        let current_latitude = sceneLocationView.sceneLocationManager.currentLocation?.coordinate.latitude ?? 0.0
+        let current_altitude = sceneLocationView.sceneLocationManager.currentLocation?.altitude ?? 0.0
+        
+        print( "longitude: " + String(current_longitude) )
+        print( "latitude: " + String(current_latitude) )
+        print( "altitude: " + String(current_altitude) )
     }
     
     func update() {

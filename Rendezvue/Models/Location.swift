@@ -39,6 +39,7 @@ class Location {
         let url = URL(string: urlString)
         var request = URLRequest(url: url!)
         request.httpMethod = "GET"
+        locations = [:]
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data,
