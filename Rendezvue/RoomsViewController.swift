@@ -11,6 +11,7 @@ import UIKit
 class RoomsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, Observer {
     //MARK:Properties
     @IBOutlet weak var roomList: UITableView!
+    @IBOutlet weak var username: UINavigationItem!
     var roomStructs = [RoomStruct]()
     
     override func viewDidLoad() {
@@ -20,6 +21,7 @@ class RoomsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         Room.sharedInstance.observerSubject.attachObserver(observer: self)
         Room.sharedInstance.getRooms()
+        username.title = User.sharedInstance.currentUsername
     }
     
     

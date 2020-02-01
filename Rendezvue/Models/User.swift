@@ -24,6 +24,7 @@ class User {
     let observerSubject = ObserverSubject()
     
     let currentUserId = 1;
+    let currentUsername = "FYDP"
     var allUsers:[Int:UserStruct] = [:];
     var usersInRoom:[Int:UserStruct] = [:];
     
