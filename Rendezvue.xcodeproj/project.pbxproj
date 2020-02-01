@@ -14,6 +14,7 @@
 		CE46D7FE22E152FB009E5648 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE46D7FD22E152FB009E5648 /* Constants.swift */; };
 		CE46D80122E153FF009E5648 /* ObserverSubject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE46D80022E153FF009E5648 /* ObserverSubject.swift */; };
 		CE46D80322E16966009E5648 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE46D80222E16966009E5648 /* User.swift */; };
+		D802D72E23E60D0200F746D9 /* LoginSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D802D72D23E60D0200F746D9 /* LoginSignUpViewController.swift */; };
 		D877DEB222DEA8DC00254781 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D877DEB122DEA8DC00254781 /* AppDelegate.swift */; };
 		D877DEB422DEA8DC00254781 /* RoomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D877DEB322DEA8DC00254781 /* RoomsViewController.swift */; };
 		D877DEB722DEA8DC00254781 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D877DEB522DEA8DC00254781 /* Main.storyboard */; };
@@ -122,6 +123,7 @@
 				D877DEBA22DEA8E300254781 /* LaunchScreen.storyboard */,
 				D877DEBD22DEA8E300254781 /* Info.plist */,
 				CE46D7FD22E152FB009E5648 /* Constants.swift */,
+				D802D72D23E60D0200F746D9 /* LoginSignUpViewController.swift */,
 			);
 			path = Rendezvue;
 			sourceTree = "<group>";
