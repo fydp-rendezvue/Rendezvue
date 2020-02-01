@@ -28,3 +28,6 @@ DerivedData/
 !*.xcodeproj/xcshareddata/
 !*.xcworkspace/contents.xcworkspacedata
 /*.gcno
+
+## Proj
+Rendezvue.xcodeproj/project.pbxproj
