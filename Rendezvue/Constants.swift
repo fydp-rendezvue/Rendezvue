@@ -7,5 +7,5 @@
 //
 
 struct Constants {
-    static let url:String = "https://e09e7a5f.ngrok.io"
+    static let url:String = "https://d5bc4d1c.ngrok.io"
 }

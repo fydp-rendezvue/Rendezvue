@@ -11,11 +11,11 @@ import SceneKit
 import MapKit
 
 /// A block that will build an SCNBox with the provided distance.
-/// Note: the distance should be aassigned to the length
+/// Note: the distance should be assigned to the length
 public typealias BoxBuilder = (_ distance: CGFloat) -> SCNBox
 
 /// A Node that is used to show directions in AR-CL.
-public class PolylineNode {
+public class PolylineNode: LocationNode {
     public private(set) var locationNodes = [LocationNode]()
 
     public let polyline: MKPolyline
@@ -28,14 +28,26 @@ public class PolylineNode {
     /// - Parameters:
     ///   - polyline: The polyline that we'll be creating location nodes for.
     ///   - altitude: The uniform altitude to use to show the location nodes.
+    ///   - tag: a String attribute to identify the node in the scene (e.g when it's touched)
     ///   - boxBuilder: A block that will customize how a box is built.
-    public init(polyline: MKPolyline, altitude: CLLocationDistance, boxBuilder: BoxBuilder? = nil) {
+    public init(polyline: MKPolyline,
+                altitude: CLLocationDistance,
+                tag: String? = nil,
+                boxBuilder: BoxBuilder? = nil) {
         self.polyline = polyline
         self.altitude = altitude
         self.boxBuilder = boxBuilder ?? Constants.defaultBuilder
 
+        super.init(location: nil)
+
+        self.tag = tag ?? Constants.defaultTag
+
         contructNodes()
     }
+
+	required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+	}
 
 }
 
@@ -49,6 +61,7 @@ private extension PolylineNode {
             box.firstMaterial?.diffuse.contents = UIColor(red: 47.0/255.0, green: 125.0/255.0, blue: 255.0/255.0, alpha: 1.0)
             return box
         }
+        static let defaultTag: String = ""
     }
 
     /// This is what actually builds the SCNNodes and appends them to the
@@ -60,18 +73,20 @@ private extension PolylineNode {
         for i in 0 ..< polyline.pointCount - 1 {
             let currentLocation = CLLocation(coordinate: points[i].coordinate, altitude: altitude)
             let nextLocation = CLLocation(coordinate: points[i + 1].coordinate, altitude: altitude)
+            let midLocation = currentLocation.approxMidpoint(to: nextLocation)
 
             let distance = currentLocation.distance(from: nextLocation)
 
             let box = boxBuilder(CGFloat(distance))
             let boxNode = SCNNode(geometry: box)
+            boxNode.removeFlicker()
 
             let bearing = -currentLocation.bearing(between: nextLocation)
 
-            boxNode.pivot = SCNMatrix4MakeTranslation(0, 0, 0.5 * Float(distance))
+            // Orient the line to point from currentLoction to nextLocation
             boxNode.eulerAngles.y = Float(bearing).degreesToRadians
 
-            let locationNode = LocationNode(location: currentLocation)
+            let locationNode = LocationNode(location: midLocation, tag: tag)
             locationNode.addChildNode(boxNode)
 
             locationNodes.append(locationNode)

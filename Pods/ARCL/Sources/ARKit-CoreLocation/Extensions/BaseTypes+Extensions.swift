@@ -9,14 +9,7 @@
 import Foundation
 
 public extension Double {
-
-    var metersToLatitude: Double {
-        return self / (6_378_137.0)
-    }
-
-    var metersToLongitude: Double {
-        return self / (6_356_752.3)
-    }
+    var short: String { return String(format: "%.02f", self) }
 }
 
 public extension Float {

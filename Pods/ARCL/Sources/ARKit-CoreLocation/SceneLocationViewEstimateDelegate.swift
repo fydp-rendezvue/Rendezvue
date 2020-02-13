@@ -13,7 +13,8 @@ import MapKit
 
 // Delegate for touch events on LocationNode
 public protocol LNTouchDelegate: class {
-    func locationNodeTouched(node: AnnotationNode)
+    func annotationNodeTouched(node: AnnotationNode)
+    func locationNodeTouched(node: LocationNode)
 }
 
 @available(iOS 11.0, *)
@@ -42,6 +43,20 @@ public protocol SceneLocationViewDelegate: class {
     func didSetupSceneNode(sceneLocationView: SceneLocationView, sceneNode: SCNNode)
 
     func didUpdateLocationAndScaleOfLocationNode(sceneLocationView: SceneLocationView, locationNode: LocationNode)
+}
+
+/// Subset of delegate methods from ARSCNViewDelegate to be notified on tracking status changes
+@available(iOS 11.0, *)
+public protocol SceneTrackingDelegate: class {
+
+    func sessionWasInterrupted(_ session: ARSession)
+
+    func sessionInterruptionEnded(_ session: ARSession)
+
+    func session(_ session: ARSession, didFailWithError error: Error)
+
+    func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera)
+
 }
 
 @available(iOS 11.0, *)

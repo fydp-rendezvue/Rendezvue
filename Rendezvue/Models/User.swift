@@ -130,7 +130,7 @@ class User {
                 }
             } catch {
                 print("JSON error: \(error.localizedDescription)")
-            }
+            }       
         })
         
         //actually make the api call

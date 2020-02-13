@@ -13,7 +13,7 @@ import MapKit
 
 ///Different methods which can be used when determining locations (such as the user's location).
 public enum LocationEstimateMethod {
-    ///Only uses core location data.
+    ///Only uses Core Location data.
     ///Not suitable for adding nodes using current position, which requires more precision.
     case coreLocationDataOnly
 
@@ -122,12 +122,13 @@ public final class SceneLocationManager {
 public extension SceneLocationManager {
     func run() {
         pause()
-        updateEstimatesTimer = Timer.scheduledTimer(
-                timeInterval: 0.1,
-                target: self,
-                selector: #selector(SceneLocationManager.updateLocationData),
-                userInfo: nil,
-                repeats: true)
+		if #available(iOS 11.0, *) {
+			updateEstimatesTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] _ in
+				self?.updateLocationData()
+			}
+		} else {
+			assertionFailure("Needs iOS 9 and 10 support")
+		}
     }
 
     func pause() {

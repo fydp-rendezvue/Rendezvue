@@ -13,16 +13,59 @@ import MapKit
 
 //Should conform to delegate here, add in future commit
 @available(iOS 11.0, *)
+
+/// `SceneLocationView` is the `ARSCNView` subclass used to render an ARCL scene.
+///
+/// Note that all of the standard SceneKit/ARKit delegates and delegate methods are used
+/// internally by ARCL. The delegate functions declared in `ARSCNViewDelegate`, `ARSessionObserver`, and  `ARSCNView` are
+/// shadowed by `ARSCNViewDelegate` and invoked on the `SceneLocationView`'s `arDelegate`. If you need to receive
+/// any of these callbacks, implement them on your `arDelegate`.
 open class SceneLocationView: ARSCNView {
     /// The limit to the scene, in terms of what data is considered reasonably accurate.
     /// Measured in meters.
     static let sceneLimit = 100.0
 
+    /// The type of tracking to use.
+    ///
+    /// - orientationTracking: Informs the `SceneLocationView` to use Device Orientation tracking only.
+	///  Useful when your nodes are all CLLocation based, and are not synced to real world planes
+    ///  See [Apple's documentation](https://developer.apple.com/documentation/arkit/arorientationtrackingconfiguration)
+    /// - worldTracking: Informs the `SceneLocationView` to use a World Tracking Configuration.
+	///  Useful when you have nodes that attach themselves to real world planes
+    ///  See [Apple's documentation](https://developer.apple.com/documentation/arkit/arworldtrackingconfiguration#overview)
+    public enum ARTrackingType {
+        case orientationTracking
+        case worldTracking
+    }
+
     public weak var locationViewDelegate: SceneLocationViewDelegate?
     public weak var locationEstimateDelegate: SceneLocationViewEstimateDelegate?
     public weak var locationNodeTouchDelegate: LNTouchDelegate?
+    public weak var sceneTrackingDelegate: SceneTrackingDelegate?
 
     public let sceneLocationManager = SceneLocationManager()
+
+    /// Addresses [Issue #196](https://github.com/ProjectDent/ARKit-CoreLocation/issues/196) -
+    /// Delegate issue when assigned to self (no location nodes render).   If the user
+    /// tries to set the delegate, perform an assertionFailure and tell them to set the `arViewDelegate` instead.
+    open override var delegate: ARSCNViewDelegate? {
+        set {
+            if let newValue = newValue, !(newValue is SceneLocationView) {
+                assertionFailure("Set the arViewDelegate instead")
+            } else if self.delegate != nil, newValue == nil {
+                assertionFailure("Attempted to nil the existing delegate (it must be self). Set the arViewDelegate instead")
+            }
+            super.delegate = newValue
+        }
+        get {
+            return super.delegate
+        }
+    }
+
+    /// If you wish to receive delegate `ARSCNViewDelegate` events, use this instead of the `delegate` property.
+    /// The `delegate` property is reserved for this class itself and trying to set it will result in an assertionFailure
+    /// and in production, things just won't work as you expect.
+    public weak var arViewDelegate: ARSCNViewDelegate?
 
     /// The method to use for determining locations.
     /// Not advisable to change this as the scene is ongoing.
@@ -73,13 +116,23 @@ open class SceneLocationView: ARSCNView {
 
     public internal(set) var locationNodes = [LocationNode]()
     public internal(set) var polylineNodes = [PolylineNode]()
+    public internal(set) var arTrackingType: ARTrackingType = .worldTracking
 
     // MARK: Internal desclarations
     internal var didFetchInitialLocation = false
 
     // MARK: Setup
-    public convenience init() {
-        self.init(frame: .zero, options: nil)
+
+    /// This initializer allows you to specify the type of tracking configuration (defaults to world tracking) as well as
+    /// some other optional values.
+    ///
+    /// - Parameters:
+    ///   - trackingType: The type of AR Tracking configuration (defaults to world tracking).
+    ///   - frame: The CGRect for the frame (defaults to .zero).
+    ///   - options: The rendering options for the `SCNView`.
+    public convenience init(trackingType: ARTrackingType = .worldTracking, frame: CGRect = .zero, options: [String: Any]? = nil) {
+        self.init(frame: frame, options: options)
+        self.arTrackingType = trackingType
     }
 
     public override init(frame: CGRect, options: [String: Any]? = nil) {
@@ -106,10 +159,6 @@ open class SceneLocationView: ARSCNView {
         self.addGestureRecognizer(touchGestureRecognizer)
     }
 
-    override open func layoutSubviews() {
-        super.layoutSubviews()
-    }
-
     /// Resets the scene heading to 0
     func resetSceneHeading() {
         sceneNode?.eulerAngles.y = 0
@@ -121,7 +170,7 @@ open class SceneLocationView: ARSCNView {
     }
 
     /// Gives the best estimate of the location of a node
-    func locationOfLocationNode(_ locationNode: LocationNode) -> CLLocation {
+    public func locationOfLocationNode(_ locationNode: LocationNode) -> CLLocation {
         if locationNode.locationConfirmed || locationEstimateMethod == .coreLocationDataOnly {
             return locationNode.location!
         }
@@ -140,13 +189,18 @@ open class SceneLocationView: ARSCNView {
 public extension SceneLocationView {
 
     func run() {
-        // Create a session configuration
-        let configuration = ARWorldTrackingConfiguration()
-        configuration.planeDetection = .horizontal
-        configuration.worldAlignment = orientToTrueNorth ? .gravityAndHeading : .gravity
+        switch arTrackingType {
+        case .worldTracking:
+            let configuration = ARWorldTrackingConfiguration()
+            configuration.planeDetection = .horizontal
+            configuration.worldAlignment = orientToTrueNorth ? .gravityAndHeading : .gravity
+            session.run(configuration)
 
-        // Run the view's session
-        session.run(configuration)
+        case .orientationTracking:
+            let configuration = AROrientationTrackingConfiguration()
+            configuration.worldAlignment = orientToTrueNorth ? .gravityAndHeading : .gravity
+            session.run(configuration)
+        }
         sceneLocationManager.run()
     }
 
@@ -178,7 +232,9 @@ public extension SceneLocationView {
 
     // MARK: LocationNodes
 
-    /// upon being added, a node's location, locationConfirmed and position may be modified and should not be changed externally.
+    /// Upon being added, a node's location, locationConfirmed and position may be modified and should not be changed externally.
+    /// Silently fails and returns without adding the node to the scene if any of `currentScenePosition`,
+    /// `sceneLocationManager.currentLocation`, or `sceneNode` is `nil`.
     func addLocationNodeForCurrentPosition(locationNode: LocationNode) {
         guard let currentPosition = currentScenePosition,
             let currentLocation = sceneLocationManager.currentLocation,
@@ -191,13 +247,16 @@ public extension SceneLocationView {
         sceneNode.addChildNode(locationNode)
     }
 
+    /// Each node's addition to the scene can silently fail; See `addLocationNodeForCurrentPosition(locationNode:)`.
+    ///
+    /// Why would we want to add multiple nodes at the current position?
     func addLocationNodesForCurrentPosition(locationNodes: [LocationNode]) {
         locationNodes.forEach { addLocationNodeForCurrentPosition(locationNode: $0) }
     }
 
-    /// location not being nil, and locationConfirmed being true are required
-    /// Upon being added, a node's position will be modified and should not be changed externally.
-    /// location will not be modified, but taken as accurate.
+    /// Silently fails and returns without adding the node unless`location` is not `nil` and `locationConfirmed` is `true`.
+    /// Upon being added, a node's position will be modified internally and should not be changed externally.
+    /// `location` will not be modified, but taken as accurate.
     func addLocationNodeWithConfirmedLocation(locationNode: LocationNode) {
         if locationNode.location == nil || locationNode.locationConfirmed == false {
             return
@@ -223,15 +282,20 @@ public extension SceneLocationView {
         }
 
         let coordinates = sender.location(in: touchedView)
-        let hitTest = touchedView.hitTest(coordinates)
+        let hitTests = touchedView.hitTest(coordinates)
 
-        if !hitTest.isEmpty,
-            let firstHitTest = hitTest.first,
-            let touchedNode = firstHitTest.node as? AnnotationNode {
-            self.locationNodeTouchDelegate?.locationNodeTouched(node: touchedNode)
+        guard let firstHitTest = hitTests.first else {
+            return
+        }
+
+        if let touchedNode = firstHitTest.node as? AnnotationNode {
+            self.locationNodeTouchDelegate?.annotationNodeTouched(node: touchedNode)
+        } else if let locationNode = firstHitTest.node.parent as? LocationNode {
+            self.locationNodeTouchDelegate?.locationNodeTouched(node: locationNode)
         }
     }
 
+    /// Each node's addition to the scene can silently fail; See `addLocationNodeWithConfirmedLocation(locationNode:)`.
     func addLocationNodesWithConfirmedLocation(locationNodes: [LocationNode]) {
         locationNodes.forEach { addLocationNodeWithConfirmedLocation(locationNode: $0) }
     }
@@ -265,7 +329,7 @@ public extension SceneLocationView {
     }
 
     func removeLocationNode(locationNode: LocationNode) {
-        if let index = locationNodes.index(of: locationNode) {
+        if let index = locationNodes.firstIndex(of: locationNode) {
             locationNodes.remove(at: index)
         }
 
@@ -284,33 +348,92 @@ public extension SceneLocationView {
     /// Note: You can provide your own SCNBox prototype to base the direction nodes from.
     ///
     /// - Parameters:
-    ///   - routes: The MKRoute of directions.
+    ///   - routes: The MKRoute of directions
     ///   - boxBuilder: A block that will customize how a box is built.
     func addRoutes(routes: [MKRoute], boxBuilder: BoxBuilder? = nil) {
+        addRoutes(polylines: routes.map { AttributedType(type: $0.polyline,
+                                                         attribute: $0.name) },
+                  boxBuilder: boxBuilder)
+    }
+
+    /// Adds polylines to the scene and lets you specify the geometry prototype for the box.
+    /// Note: You can provide your own SCNBox prototype to base the direction nodes from.
+    ///
+    /// - Parameters:
+    ///   - polylines: The list of attributed MKPolyline to rendered
+    ///   - Δaltitude: difference between box and current user altitude
+    ///   - boxBuilder: A block that will customize how a box is built.
+    func addRoutes(polylines: [AttributedType<MKPolyline>],
+                   Δaltitude: CLLocationDistance = -2.0,
+                   boxBuilder: BoxBuilder? = nil) {
         guard let altitude = sceneLocationManager.currentLocation?.altitude else {
             return assertionFailure("we don't have an elevation")
         }
-        let polyNodes = routes.map {
-            PolylineNode(polyline: $0.polyline, altitude: altitude - 2.0, boxBuilder: boxBuilder)
+        let polyNodes = polylines.map {
+            PolylineNode(polyline: $0.type,
+                         altitude: altitude + Δaltitude,
+                         tag: $0.attribute,
+                         boxBuilder: boxBuilder)
         }
 
         polylineNodes.append(contentsOf: polyNodes)
         polyNodes.forEach {
             $0.locationNodes.forEach {
                 let locationNodeLocation = self.locationOfLocationNode($0)
+            $0.updatePositionAndScale(setup: true,
+                                      scenePosition: currentScenePosition,
+                                          locationNodeLocation: locationNodeLocation,
+                                      locationManager: sceneLocationManager,
+                                      onCompletion: {})
+            sceneNode?.addChildNode($0)
+        }
+    }
+    }
+
+    func removeRoutes(routes: [MKRoute]) {
+        routes.forEach { route in
+            if let index = polylineNodes.firstIndex(where: { $0.polyline == route.polyline }) {
+                polylineNodes.remove(at: index)
+            }
+        }
+    }
+}
+
+@available(iOS 11.0, *)
+public extension SceneLocationView {
+    /// Adds polylines to the scene and lets you specify the geometry prototype for the box.
+    /// Note: You can provide your own SCNBox prototype to base the direction nodes from.
+    ///
+    /// - Parameters:
+    ///   - polylines: A set of MKPolyline.
+    ///   - boxBuilder: A block that will customize how a box is built.
+    func addPolylines(polylines: [MKPolyline], boxBuilder: BoxBuilder? = nil) {
+
+        guard let altitude = sceneLocationManager.currentLocation?.altitude else {
+            return assertionFailure("we don't have an elevation")
+        }
+        polylines.forEach { (polyline) in
+            polylineNodes.append(PolylineNode(polyline: polyline, altitude: altitude - 2.0, boxBuilder: boxBuilder))
+        }
+
+        polylineNodes.forEach {
+            $0.locationNodes.forEach {
+
+                let locationNodeLocation = self.locationOfLocationNode($0)
                 $0.updatePositionAndScale(setup: true,
                                           scenePosition: currentScenePosition,
                                           locationNodeLocation: locationNodeLocation,
                                           locationManager: sceneLocationManager,
                                           onCompletion: {})
+
                 sceneNode?.addChildNode($0)
             }
         }
     }
 
-    func removeRoutes(routes: [MKRoute]) {
-        routes.forEach { route in
-            if let index = polylineNodes.index(where: { $0.polyline == route.polyline }) {
+    func removePolylines(polylines: [MKPolyline]) {
+        polylines.forEach { polyline in
+            if let index = polylineNodes.firstIndex(where: { $0.polyline == polyline }) {
                 polylineNodes.remove(at: index)
             }
         }
@@ -334,15 +457,30 @@ extension SceneLocationView: SceneLocationManagerDelegate {
         }
     }
 
+    /// Updates the position and scale of the `polylineNodes` and the `locationNodes`.
     func updatePositionAndScaleOfLocationNodes() {
+		polylineNodes.filter { $0.continuallyUpdatePositionAndScale }.forEach { node in
+			node.locationNodes.forEach { node in
+				let locationNodeLocation = self.locationOfLocationNode(node)
+				node.updatePositionAndScale(
+                    setup: false,
+                    scenePosition: currentScenePosition,
+                    locationNodeLocation: locationNodeLocation,
+                    locationManager: sceneLocationManager) {
+                        self.locationViewDelegate?.didUpdateLocationAndScaleOfLocationNode(
+                            sceneLocationView: self, locationNode: node)
+				} // updatePositionAndScale
+			} // foreach Location node
+		} // foreach Polyline node
+
         locationNodes.filter { $0.continuallyUpdatePositionAndScale }.forEach { node in
             let locationNodeLocation = locationOfLocationNode(node)
-            node.updatePositionAndScale(scenePosition: currentScenePosition,
-                                        locationNodeLocation: locationNodeLocation,
-                                        locationManager: sceneLocationManager) {
-                                            self.locationViewDelegate?
-                                                .didUpdateLocationAndScaleOfLocationNode(sceneLocationView: self,
-                                                                                         locationNode: node)
+            node.updatePositionAndScale(
+                scenePosition: currentScenePosition,
+                locationNodeLocation: locationNodeLocation,
+                locationManager: sceneLocationManager) {
+                    self.locationViewDelegate?.didUpdateLocationAndScaleOfLocationNode(
+                        sceneLocationView: self, locationNode: node)
             }
         }
     }
